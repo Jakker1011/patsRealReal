@@ -15,29 +15,28 @@ import javax.swing.JOptionPane;
  * @author Jacob Sacks
  */
 public class viewClient extends javax.swing.JFrame {
-    connectDB db = new connectDB();
-    patArray ptn = new patArray();
-    populateCombo pop = new populateCombo();
-    sessionArray ssn = new sessionArray();
+    connectDB db = new connectDB();//creates an object for the class: connectDB
+    patArray ptn = new patArray();//creates an object for the class: patArray
+    populateCombo pop = new populateCombo();//creates an object for the class: populateCombo
+    sessionArray ssn = new sessionArray();//creates an object for the class: sessionArray
   
    
     /**
      * Creates new form viewClient
      */
-    public viewClient() {
-        initComponents();
+    public viewClient() {//constructor methood for  Class
+        initComponents();//initiates all the components for the screen
         try{
-        String fname = UserArray.currentPatient.getfName();
-        String sname = UserArray.currentPatient.getsName();
-        LblGreet.setText("Welcome " + fname + " " + sname);
+        String fname = UserArray.currentPatient.getfName();//sets the String varable to the Static variable
+        String sname = UserArray.currentPatient.getsName();//sets the String varable to the Static variable
+        LblGreet.setText("Welcome " + fname + " " + sname);//sets the for LblGreet
                 } catch (Exception e) { //if this wss not attained an error message will appear
-                    System.out.println("Error");
                 this.hide(); //makes login frame hidden
-                new LoginDetail().setVisible(true); 
+                new LoginDetail().setVisible(true); //makes the screen LoginDetail visiable
         }
-        int id = ptn.getID(UserArray.currentPatient.getfName(), UserArray.currentPatient.getsName());
-        this.list.setModel(pop.populateClientList(id));
-        this.txtTotal.setText("R" + ssn.totalDue(id));
+        int id = ptn.getID(UserArray.currentPatient.getfName(), UserArray.currentPatient.getsName());//sets the integer varaiable using the methood from pstient array
+        this.list.setModel(pop.populateClientList(id));//sets the default list model
+        this.txtTotal.setText("R" + ssn.totalDue(id));//sets txtTotal eqaul to the toatal from the session array
     }
 
     /**
@@ -145,10 +144,10 @@ public class viewClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
-         UserArray.currentPatient = null;
-         Login.nUser = false;
+         UserArray.currentPatient = null;//sets the static varablie  currentPatient equal to null
+         Login.nUser = false;//sets the static varaible to false 
        this.hide(); //makes view client frame hidden
-       new Login().setVisible(true);
+       new Login().setVisible(true);//sets the Login Screen to be visaible
     }//GEN-LAST:event_menuLogoutActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

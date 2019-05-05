@@ -12,22 +12,22 @@ import javax.swing.JOptionPane;
  * @author Jacob Sacks
  */
 public class viewPatient extends javax.swing.JFrame {
-    patArray ptn = new patArray();
-    MedArray medi = new MedArray();
-    sessionArray ssn = new sessionArray();
+    patArray ptn = new patArray();//creates an object for the class: patArray
+    MedArray medi = new MedArray();//creates an object for the class: MedArray
+    sessionArray ssn = new sessionArray();//creates an object for the class: sessionArray
     /**
      * Creates new form viewPatient
      */
-    public viewPatient() {
-        initComponents();
-        patient p = ptn.getFULLPatientID(viewSession.currentID);
-        this.lblFName.setText(p.getfName());
-        this.lblSName.setText(p.getsName());
-        this.MedAid.setText(medi.getMedicalAid(p.getMedAidNo()));
-        this.MedNo.setText(p.getMedAidNo() + "");
-        this.Bday.setText(p.getDateOfBirth());
-        this.total.setText("R"+ssn.totalDue(viewSession.currentID));
-        this.Email.setText(p.getEmail());
+    public viewPatient() {//constructor methood for  Class
+        initComponents();//initiates all the components for the screen
+        patient p = ptn.getFULLPatientID(viewSession.currentID);//creates a new patient object and sets it using the getFULLPatientID methood 
+        this.lblFName.setText(p.getfName());//sets lblFName text useing the patient object
+        this.lblSName.setText(p.getsName());//sets lblSName text useing the patient object
+        this.MedAid.setText(medi.getMedicalAid(p.getMedAidNo()));//sets MedAid text useing the getMedicalAid methood
+        this.MedNo.setText(p.getMedAidNo() + "");//sets MedNo text useing the patient object
+        this.Bday.setText(p.getDateOfBirth());//sets Bday text useing the patient object
+        this.total.setText("R"+ssn.totalDue(viewSession.currentID));//sets total text useing the patient object
+        this.Email.setText(p.getEmail());//sets Email text useing the patient object 
     }
 
     /**
@@ -191,16 +191,16 @@ public class viewPatient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        this.hide();
-        viewSession.currentID = 0;
-        viewSession.currentSes = 0;
+        this.hide();//closes viewPatients screen 
+        viewSession.currentID = 0;//sets the static varaible currentID to 0
+        viewSession.currentSes = 0;//sets the static varaible currentSes to 0
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMailActionPerformed
-        String sub = JOptionPane.showInputDialog("Enter The Subject For The EMail");
-        String text = JOptionPane.showInputDialog("Enter Your Message to be Eamiled");
-        patient p = ptn.getFULLPatientID(viewSession.currentID);
-        Emails email = new Emails(p.getEmail(), text, sub);
+        String sub = JOptionPane.showInputDialog("Enter The Subject For The EMail");//askes the user to input the email
+        String text = JOptionPane.showInputDialog("Enter Your Message to be Eamiled");//askes the user to input the message
+        patient p = ptn.getFULLPatientID(viewSession.currentID);//sets the patient object
+        Emails email = new Emails(p.getEmail(), text, sub);//creates a new email to be sent
     }//GEN-LAST:event_btnMailActionPerformed
 
     /**

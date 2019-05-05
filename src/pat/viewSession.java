@@ -28,45 +28,45 @@ import javax.swing.table.TableModel;
  */
 public class viewSession extends javax.swing.JFrame {
 
-    connectDB db = new connectDB();
-    patArray ptn = new patArray();
-    sessionArray ssn = new sessionArray();
-    public static String currentPat = "";
-    public static int currentID = 0;
-    public static int currentSes = 0;
-    sqlStatements sqlStatement = new sqlStatements();
-    Date DATE = new Date();
-    UserArray usr = new UserArray();
-    populateCombo pop = new populateCombo();
-    public int add = 0;
-    CalendarModel model = new CalendarModel();
-    public static session s = null;
-    public static boolean update = false;
-    Validate val = new Validate();
-    public static ArrayList<session> tSess = null;
+    connectDB db = new connectDB();//creates an object for the class: connectDB
+    patArray ptn = new patArray();//creates an object for the class: patArray
+    sessionArray ssn = new sessionArray();//creates an object for the class: sessionArray
+    public static String currentPat = "";//creates a static variable called: currentPat
+    public static int currentID = 0;//creates a static variable called: currentID
+    public static int currentSes = 0;//creates a static variable called: currentSes
+    sqlStatements sqlStatement = new sqlStatements();//creates an object for the class: sqlStatement
+    Date DATE = new Date();//creates an object for the class: Date
+    UserArray usr = new UserArray();//creates an object for the class: UserArray
+    populateCombo pop = new populateCombo();//creates an object for the class: populateCombo
+    public int add = 0;//creates an integer variable called add
+    CalendarModel model = new CalendarModel();//creates an object for the class: connectDB
+    public static session s = null;//creates a static variable session called: s
+    public static boolean update = false;//creates a static boolean variable called update and sets it to false
+    Validate val = new Validate();//creates an object for the class: Validate
+    public static ArrayList<session> tSess = null;//creates a static arraylist called tSess
     
-    public viewSession() {
-        initComponents();
-        this.btnDisplayAll.setBackground(Color.YELLOW);
-        this.lbldate.setText("Todays Date: " + DATE.getDate());
-        this.lblDate2.setText("Todays Date: " + DATE.getDate());
-        tblSessions.setModel(pop.populateSessionTable());
-        tblSessions.setAutoCreateRowSorter(true);
-        DefaultComboBoxModel Tpatient = new DefaultComboBoxModel(pop.populatePatients());
-        this.cmbPatient.setModel(Tpatient);
-        DefaultComboBoxModel MED = new DefaultComboBoxModel(pop.populateMED());
-        this.cmbMedAid.setModel(MED);
-        this.tblCredit.setModel(pop.populateCreditTable());
-        tblCredit.setAutoCreateRowSorter(true);
-        this.cmbPatients.setModel(Tpatient);
-        this.lblMonth.setText(pop.setMonth(add));
-        DefaultComboBoxModel year = new DefaultComboBoxModel(pop.populateYear());
-        this.cmbYear.setModel(year);
-        this.tblCalendar.setModel(pop.populateCalender(Integer.parseInt(cmbYear.getSelectedItem().toString()), DATE.revMonth(lblMonth.getText())));
+    public viewSession() {//constructor methood for  Class
+        initComponents();//initiates all the components for the screen
+        this.btnDisplayAll.setBackground(Color.YELLOW);//sets the colour of btnDisplayAll to alter the user to click the botton
+        this.lbldate.setText("Todays Date: " + DATE.getDate());//sets the label with todays date
+        this.lblDate2.setText("Todays Date: " + DATE.getDate());//sets the label with todays date
+        tblSessions.setModel(pop.populateSessionTable());//sets the model of the table tblSessions
+        tblSessions.setAutoCreateRowSorter(true);//allows for the rows to be sorterd
+        DefaultComboBoxModel Tpatient = new DefaultComboBoxModel(pop.populatePatients());//creates a new default table model using a methood from popuatePatients
+        this.cmbPatient.setModel(Tpatient);//sets the model of cmbPatient
+        DefaultComboBoxModel MED = new DefaultComboBoxModel(pop.populateMED());//creates a new default table model using a methood from popuatePatients
+        this.cmbMedAid.setModel(MED);//sets the model of cmbMedAid
+        this.tblCredit.setModel(pop.populateCreditTable());//creates a new default table model using a methood from popuatePatients
+        tblCredit.setAutoCreateRowSorter(true);//allows for the rows to be sorterd
+        this.cmbPatients.setModel(Tpatient);//sets the model of cmbPatients
+        this.lblMonth.setText(pop.setMonth(add));//sets the text of lblMonth to todays date
+        DefaultComboBoxModel year = new DefaultComboBoxModel(pop.populateYear());//creates a new default table model using a methood from popuatePatients
+        this.cmbYear.setModel(year);//sets the model of cmbYear 
+        this.tblCalendar.setModel(pop.populateCalender(Integer.parseInt(cmbYear.getSelectedItem().toString()), DATE.revMonth(lblMonth.getText())));//sets the model of the calendar in the table tblCalendar
         
         
     }
-    DefaultListModel sessionAddedList = new DefaultListModel();
+    DefaultListModel sessionAddedList = new DefaultListModel();//creates a new default list model
     /**
      * This method is called from within the constructor to the form. WARNING:
      * Do NOT modify this code. The content of this method is always regenerated
@@ -922,9 +922,9 @@ public class viewSession extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
-        UserArray.currentPatient = null;
+        UserArray.currentPatient = null;//sets the Static variable currentPatient to nul
         this.hide(); //makes view sessions frame hidden
-        new Login().setVisible(true);
+        new Login().setVisible(true);//sets Login scrren to be visiable
     }//GEN-LAST:event_menuLogoutActionPerformed
 
     public void editSetup() {
@@ -942,40 +942,40 @@ public class viewSession extends javax.swing.JFrame {
 
     }
     private void btnRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestActionPerformed
-        this.sessionAddedList.clear();
-         DefaultComboBoxModel ses = new DefaultComboBoxModel(pop.populateSession(cmbPatient.getSelectedItem() + ""));
-        cmbSessions.setModel(ses);
+        this.sessionAddedList.clear();//clears the lsit in sessionAddedList
+         DefaultComboBoxModel ses = new DefaultComboBoxModel(pop.populateSession(cmbPatient.getSelectedItem() + ""));//creates a new default table model using a methood from popuatePatients
+        cmbSessions.setModel(ses);//sets the model of cmbSessions
     }//GEN-LAST:event_btnRestActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         try {
-            this.sessionAddedList.remove(this.list.getSelectedIndex());
-            this.list.setModel(this.sessionAddedList);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Please select a session to remove");
+            this.sessionAddedList.remove(this.list.getSelectedIndex());//removes the selected element in sessionAddedList
+            this.list.setModel(this.sessionAddedList);//resets the model of the list
+        } catch (Exception e) {//catches the statemenet 
+            JOptionPane.showMessageDialog(null, "Please select a session to remove");//displays the error message
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void cmbSessionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSessionsActionPerformed
-        connectDB db = new connectDB();
-        String vali = "";
+        connectDB db = new connectDB();//creates an object for the class: connectDB
+        String vali = "";//creates a string variable
         try{
-            vali = cmbSessions.getSelectedItem().toString();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Please push reset to get the get other sessions");
+            vali = cmbSessions.getSelectedItem().toString();//gets the selected item from cmbSessions
+        }catch(Exception e){//cateches the statement above
+            JOptionPane.showMessageDialog(null, "Please push reset to get the get other sessions");//alerts the user to push the rest button 
         }
-        if (vali != "Sessions") {
-            sessionAddedList.addElement(vali);
-            this.list.setModel(sessionAddedList);
-            cmbSessions.removeItem(cmbSessions.getSelectedItem());
+        if (vali != "Sessions") {//make sure the selected item is not the hedding 
+            sessionAddedList.addElement(vali);//adds the selected item to the lsit called sessionAddedList
+            this.list.setModel(sessionAddedList);//resets the model of the lsit
+            cmbSessions.removeItem(cmbSessions.getSelectedItem());//removes selected item from the lsit
         }
     }//GEN-LAST:event_cmbSessionsActionPerformed
 
     private void cmbPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPatientActionPerformed
-        if (cmbPatient.getSelectedItem() != "Patients") {
-            DefaultComboBoxModel ses = new DefaultComboBoxModel(pop.populateSession(cmbPatient.getSelectedItem() + ""));
-            this.cmbSessions.setModel(ses);
-            this.sessionAddedList.clear();
+        if (cmbPatient.getSelectedItem() != "Patients") {//make sure the selected item is not the hedding 
+            DefaultComboBoxModel ses = new DefaultComboBoxModel(pop.populateSession(cmbPatient.getSelectedItem() + ""));//creates a new default table model using a methood from popuatePatients
+            this.cmbSessions.setModel(ses);//sets the model of the combo box cmbSessions
+            this.sessionAddedList.clear();//cleara the sessionAddedList
         }
     }//GEN-LAST:event_cmbPatientActionPerformed
 
@@ -985,111 +985,107 @@ public class viewSession extends javax.swing.JFrame {
         String PatientFname = currentPat.substring(0, val);//gets first name
         String PateintSname = currentPat.substring((val + 1), currentPat.length());//gets sur name 
         String text = ssn.composeInvoice() + "\n" + sqlStatement.populateHeaddings() +"\n"; //calls up methood to compose invoice for every session
-        int toatal = 0;
-        for (int i = 0; i < this.sessionAddedList.getSize(); i++) {
+        int toatal = 0;//creates an integer variable 
+        for (int i = 0; i < this.sessionAddedList.getSize(); i++) {//loops through the sessionAddedList list 
             session current = ssn.getSession(PatientFname, PateintSname, this.sessionAddedList.elementAt(i) + ""); //adds patient info to email
-            toatal = current.getAmount() + toatal;
-            text += sqlStatement.populateInvoice(this.sessionAddedList.elementAt(i) + "", PatientFname, PateintSname, current.getcode(), current.getIDC10(),current.getAmount(), toatal );
+            toatal = current.getAmount() + toatal;//keeps a running total
+            text += sqlStatement.populateInvoice(this.sessionAddedList.elementAt(i) + "", PatientFname, PateintSname, current.getcode(), current.getIDC10(),current.getAmount(), toatal );//creates the text of the email
         }
-        String toAddress = "";
-        int id = ptn.getID(PatientFname, PateintSname);
-        String sql = sqlStatement.getEmailAD(id);
-        ResultSet r = db.getResults(sql);
+        String toAddress = "";//creates a string to store the toAddress
+        int id = ptn.getID(PatientFname, PateintSname);//creates an integer variable that stores the patient ID
+        String sql = sqlStatement.getEmailAD(id);//gets a sql statemnt to get the email
+        ResultSet r = db.getResults(sql);//updates the data base useing the sql statement
         try {
-            while (r.next()) {
-                toAddress = (r.getString("medEmail"));
+            while (r.next()) {//while the result set has a next element
+                toAddress = (r.getString("medEmail"));//to to adress to set to the email
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(populateCombo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {//catches the result set
+            Logger.getLogger(populateCombo.class.getName()).log(Level.SEVERE, null, ex);//gievs an exception to the catch statemtemnt
         }
-        System.out.println(text);
         Emails email = new Emails(toAddress, text, "Invoice");// then the email gets sent as a parameter to the email class
          this.sessionAddedList.clear();//clears the list
          DefaultComboBoxModel ses = new DefaultComboBoxModel(pop.populateSession(cmbPatient.getSelectedItem() + ""));//repopulaes session combobox
         cmbSessions.setModel(ses);//sets the model of the comobox
-        //}else{
-         //   JOptionPane.showMessageDialog(null, "please add sessions to the list");
-       // }
 
     }//GEN-LAST:event_btnEmailActionPerformed
 
     private void btnNewSessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewSessionActionPerformed
-        this.hide();
-        new NewSession().setVisible(true);
+        this.hide();//closes view session screen 
+        new NewSession().setVisible(true);//sets NewSession to be visiable
     }//GEN-LAST:event_btnNewSessionActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
-        tblSessions.setModel(pop.populateSessionTable());
-        this.txtTotal.setText("");
+        tblSessions.setModel(pop.populateSessionTable());//populates tblSessions again to refresh it
+        this.txtTotal.setText("");//the text is set to empty
 
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
          int row = tblSessions.getSelectedRow();// row becomes a row selected in the tblstudents
-        if (row != -1) {
-            ssn.DeleteSession(Integer.parseInt(tblSessions.getValueAt(row, 0).toString()));
-            tblSessions.setModel(pop.populateSessionTable());
-            JOptionPane.showMessageDialog(null, "Session Deleted");
+        if (row != -1) {//make sure a row was selected 
+            ssn.DeleteSession(Integer.parseInt(tblSessions.getValueAt(row, 0).toString()));//calls a methood from sesson array to delete that row
+            tblSessions.setModel(pop.populateSessionTable());//repopulates the table
+            JOptionPane.showMessageDialog(null, "Session Deleted");//a message is shown to confirm that a session was delted
         } else {
-            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");
+            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");//alerts the user to select a row
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnDisplayAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayAllActionPerformed
-        tblPatients.setModel(pop.populatePatientTable());
-        tblPatients.setAutoCreateRowSorter(true);
-        this.btnDisplayAll.setBackground(Color.WHITE);
-        this.btnDisplayAll.setText("Refresh");
-        this.txtSerach.setText("");
+        tblPatients.setModel(pop.populatePatientTable());//sets the model of tblPatients
+        tblPatients.setAutoCreateRowSorter(true);//allows for auto row sorting
+        this.btnDisplayAll.setBackground(Color.WHITE);//sets the coulour of btnDisplayAll
+        this.btnDisplayAll.setText("Refresh");//sets the text of btnDisplayAll to be refresh
+        this.txtSerach.setText("");//set the text of txtSerach to be empty 
     }//GEN-LAST:event_btnDisplayAllActionPerformed
 
     private void btnNewPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewPatActionPerformed
 
-        new LoginDetail().setVisible(true);
-        this.hide();
+        new LoginDetail().setVisible(true);//sets the LoginDetail screen to be visiable
+        this.hide();//sets this screen to not be visiable
 
     }//GEN-LAST:event_btnNewPatActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        if(val.wasentered(txtSerach.getText())){
-        String sqlSt = ptn.serachPatient(this.cmbFields.getSelectedItem() + "", this.txtSerach.getText() + "");
-        DefaultTableModel model3 = (DefaultTableModel) db.getPatient(sqlSt);
-        tblPatients.setModel(model3);
+        if(val.wasentered(txtSerach.getText())){//make sure that txtSerach has text in it
+        String sqlSt = ptn.serachPatient(this.cmbFields.getSelectedItem() + "", this.txtSerach.getText() + "");//creates a sql statemnt to search for a patient
+        DefaultTableModel model3 = (DefaultTableModel) db.getPatient(sqlSt);//creates a default table model and sets it to use the sql statemnt
+        tblPatients.setModel(model3);//sets the model of tblPatients
         }else 
         {
-            JOptionPane.showMessageDialog(null, Validate.message);
-            Validate.message = "";
+            JOptionPane.showMessageDialog(null, Validate.message);// displays  the error message 
+            Validate.message = "";//restest the error message 
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDeletePatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePatActionPerformed
     int row = tblPatients.getSelectedRow();// row becomes a row selected in the tblstudents
-    int tempID = (Integer.parseInt(tblPatients.getValueAt(row, 0).toString()));
-        if (row != -1) {
-            ptn.DeletePaient(tempID);
-            tblPatients.setModel(pop.populatePatientTable());
-            JOptionPane.showMessageDialog(null, "Patient Deleted");
-           int ans =  JOptionPane.showConfirmDialog(null, "would You like to delete this patients sessions?");
-           if(ans ==2){
-               ssn.DeleteManySession(tempID);
+    int tempID = (Integer.parseInt(tblPatients.getValueAt(row, 0).toString()));//sets the ID of the selected row
+        if (row != -1) {//makes sure a row was selected 
+            ptn.DeletePaient(tempID);//uses a methood from patient array to delete the patient
+            tblPatients.setModel(pop.populatePatientTable());//sets the model of the tblPatients
+            JOptionPane.showMessageDialog(null, "Patient Deleted");//alrts the user that the patient was deleted 
+           int ans =  JOptionPane.showConfirmDialog(null, "would You like to delete this patients sessions?");//askes the user if they would like to delte the patints sessions aswell
+           if(ans ==2){//if answer is yes 
+               ssn.DeleteManySession(tempID);//detletes the patients sessions
            }
-        tblSessions.setModel(pop.populateSessionTable());
-        DefaultComboBoxModel Tpatient = new DefaultComboBoxModel(pop.populatePatients());
-        this.cmbPatient.setModel(Tpatient);
-        DefaultComboBoxModel MED = new DefaultComboBoxModel(pop.populateMED());
-        this.cmbMedAid.setModel(MED);
-        this.tblCredit.setModel(pop.populateCreditTable());
-        this.cmbPatients.setModel(Tpatient);
+        tblSessions.setModel(pop.populateSessionTable());//sets the model of tblSessions using populate comboboxes calss 
+        DefaultComboBoxModel Tpatient = new DefaultComboBoxModel(pop.populatePatients());//creates a new default table model using a methood from popuatePatients
+        this.cmbPatient.setModel(Tpatient);//sets the model of cmbPatient
+        DefaultComboBoxModel MED = new DefaultComboBoxModel(pop.populateMED());//creates a new default table model using a methood from popuatePatients
+        this.cmbMedAid.setModel(MED);//sets the model of cmbMedAid
+        this.tblCredit.setModel(pop.populateCreditTable());//sets the model of tblCredit
+        this.cmbPatients.setModel(Tpatient);//sets the model of cmbPatients
         } else {
-            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");
+            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");//alerts the userr to select a row from the table
         }
     }//GEN-LAST:event_btnDeletePatActionPerformed
 
     private void cmbMedAidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMedAidActionPerformed
-        String medAid = "" + this.cmbMedAid.getSelectedItem();
-        String sql = pop.populateCMB(medAid);
-        DefaultTableModel model = db.getPatient(sql);
-        tblPatients.setModel(model);
+        String medAid = "" + this.cmbMedAid.getSelectedItem();//gets the selected item from the combo box and stores it in th string variable
+        String sql = pop.populateCMB(medAid);//creates a sql statemnt useing the methood populateCMB
+        DefaultTableModel model = db.getPatient(sql);//creates a new default table model using a methood from popuatePatients
+        tblPatients.setModel(model);//sets the model of tblPatients 
     }//GEN-LAST:event_cmbMedAidActionPerformed
 
     private void cmbFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFieldsActionPerformed
@@ -1097,34 +1093,34 @@ public class viewSession extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbFieldsActionPerformed
 
     private void btnNewUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewUActionPerformed
-        if (val.wasentered(this.txtUname.getText()) && val.isLoginPass(this.txtPword.getText()) == true && val.wasentered(this.txtEmail.getText()) && val.isemail(this.txtEmail.getText())) {
-            if (usr.CheckExist(this.txtUname.getText()) == false) {
-                usr.CreateNewAdmin(this.txtUname.getText(), this.txtPword.getText(), this.txtEmail.getText());
-                this.txtEmail.setText("");
-                this.txtPword.setText("");
-                this.txtUname.setText("");
-                Validate.message = "";
+        if (val.wasentered(this.txtUname.getText()) && val.isLoginPass(this.txtPword.getText()) == true && val.wasentered(this.txtEmail.getText()) && val.isemail(this.txtEmail.getText())) {//makes sure that all the enterd values are valid using the validate class's diffrent methoods
+            if (usr.CheckExist(this.txtUname.getText()) == false) {//checks if the user name already exits
+                usr.CreateNewAdmin(this.txtUname.getText(), this.txtPword.getText(), this.txtEmail.getText());//creates a new admin using the methood CreateNewAdmin
+                this.txtEmail.setText("");//sets the text to empty
+                this.txtPword.setText("");//sets the text to empty
+                this.txtUname.setText("");//sets the text to empty
+                Validate.message = "";//rests the validtae message 
             } else {
-                JOptionPane.showMessageDialog(null, "User Name Already taken");
-                Validate.message = "";
+                JOptionPane.showMessageDialog(null, "User Name Already taken");//alerts the user that the name is not availbe
+                Validate.message = "";//rests the validtae message 
             }
         } else {
-            JOptionPane.showMessageDialog(null, Validate.message);
-            Validate.message = "";
+            JOptionPane.showMessageDialog(null, Validate.message);//displays the errors 
+            Validate.message = "";//rests the validtae message 
         }
 
     }//GEN-LAST:event_btnNewUActionPerformed
 
     private void cmbPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPatientsActionPerformed
-        String selPatient = this.cmbPatients.getSelectedItem() + "";
+        String selPatient = this.cmbPatients.getSelectedItem() + "";//gets the selected item form cmbPatients
         int val = selPatient.indexOf(' ');//get pos of space
         String PatientFname = selPatient.substring(0, val);//gets first name
         String PateintSname = selPatient.substring((val + 1), selPatient.length());//gets sur name 
-        String sqlS = sqlStatement.updatePatients(selPatient);
-        connectDB db = new connectDB();
-        DefaultTableModel model = db.getSession(sqlS);
-        this.tblSessions.setModel(model);
-        this.txtTotal.setText("Toatal Due is R" + ssn.totalDue(ptn.getID(PatientFname, PateintSname)) + "");
+        String sqlS = sqlStatement.updatePatients(selPatient);//creates a sql statemnt useing the methood updatePatients
+        connectDB db = new connectDB();//recreates the object for class connectDB
+        DefaultTableModel model = db.getSession(sqlS);//creates a new defaut table model and gets the seioons to populate it
+        this.tblSessions.setModel(model);//srts the model of tblSessions
+        this.txtTotal.setText("Toatal Due is R" + ssn.totalDue(ptn.getID(PatientFname, PateintSname)) + "");//sets the text of txttoatal to display the toatal due
 
     }//GEN-LAST:event_cmbPatientsActionPerformed
 
@@ -1134,95 +1130,95 @@ public class viewSession extends javax.swing.JFrame {
 
     private void btnPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaidActionPerformed
         int row = tblCredit.getSelectedRow();// row becomes a row selected in the tblstudents
-        if (row != -1) {
-            session s = ssn.getSession(tblCredit.getValueAt(row, 0).toString(), tblCredit.getValueAt(row, 1).toString(), tblCredit.getValueAt(row, 2).toString());
-            String sql = sqlStatement.MakePaid(s.getSessionID() + "");
+        if (row != -1) {//makes sure that a row as selected 
+            session s = ssn.getSession(tblCredit.getValueAt(row, 0).toString(), tblCredit.getValueAt(row, 1).toString(), tblCredit.getValueAt(row, 2).toString());//creaes a sew sessiona and calles it s
+            String sql = sqlStatement.MakePaid(s.getSessionID() + "");//creates a sql statemnt to make the selcted seion paid
             try {
-                db.UpdateDatabase(sql);
-            } catch (SQLException ex) {
-                Logger.getLogger(viewSession.class.getName()).log(Level.SEVERE, null, ex);
+                db.UpdateDatabase(sql);//updates the data base useing the sql statemnt to MakePaid
+            } catch (SQLException ex) {//cateches th update of the DB
+                Logger.getLogger(viewSession.class.getName()).log(Level.SEVERE, null, ex);//displays the error message 
             }
 
-            this.tblCredit.setModel(pop.populateCreditTable());
+            this.tblCredit.setModel(pop.populateCreditTable());//sets the model of tblCredit
         } else {
-            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");
+            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");//alerts the user to select a row
         }
     }//GEN-LAST:event_btnPaidActionPerformed
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-        int row = tblCredit.getSelectedRow();
-        if (row != -1) {
-            session s = ssn.getSession(tblCredit.getValueAt(row, 0).toString(), tblCredit.getValueAt(row, 1).toString(), tblCredit.getValueAt(row, 2).toString());
-            patient p = ptn.getFULLPatientID(s.getPatID());
-            this.Home.setSelectedIndex(3);
-            this.cmbPatient.setSelectedItem(p.getfName() + " " + p.getsName());
+        int row = tblCredit.getSelectedRow();//gets the int value of the selected row
+        if (row != -1) {//make sure that a row was selected
+            session s = ssn.getSession(tblCredit.getValueAt(row, 0).toString(), tblCredit.getValueAt(row, 1).toString(), tblCredit.getValueAt(row, 2).toString());//creaes a sew sessiona and calles it s
+            patient p = ptn.getFULLPatientID(s.getPatID());//creates a patient object and calles it p useing the methood getFULLPatientID
+            this.Home.setSelectedIndex(3);//sets the right screen to be displayed
+            this.cmbPatient.setSelectedItem(p.getfName() + " " + p.getsName());//sets what item to display on the combo box
         }else {
-            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");
+            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");//alerts the user to select a row from the table
         }
     }//GEN-LAST:event_btnSendActionPerformed
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
         int row = tblSessions.getSelectedRow();// row becomes a row selected in the tblstudents
-        if (row != -1) {
-            int id = Integer.parseInt(tblSessions.getValueAt(row, 0).toString());
-            currentSes = id;
-            currentID = ssn.getPatient(id);
-            new viewPatient().setVisible(true);
+        if (row != -1) {//malkes sure a row was selected
+            int id = Integer.parseInt(tblSessions.getValueAt(row, 0).toString());//gets the id of the patient and stores it in the integer variable id
+            currentSes = id;//makes the static variable currentSes = the ID
+            currentID = ssn.getPatient(id);//makes the static variable currentID = session id useing methood getPatient
+            new viewPatient().setVisible(true); //sets the screen viewPatient to be visiable
         } else {
-            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");
+            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");//alerts the user to select a row from the table
         }
     }//GEN-LAST:event_btnSelectActionPerformed
 
     private void btnSearchPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchPatActionPerformed
         int row = tblPatients.getSelectedRow();// row becomes a row selected in the tblstudents
-        if (row != -1) {
-            int id = Integer.parseInt(tblPatients.getValueAt(row, 0).toString());
-            currentID = id;
-            new viewPatient().setVisible(true);
+        if (row != -1) {//make sure a row was chosen
+            int id = Integer.parseInt(tblPatients.getValueAt(row, 0).toString());//gets the id of the patient and stores it in the integer variable id
+            currentID = id;//makes the static variable currentSes = the ID
+            new viewPatient().setVisible(true);//sets the screen viewPatient to be visiable
         } else {
-            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");
+            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");//alerts the user to select a row from the table
         }
     }//GEN-LAST:event_btnSearchPatActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int row = tblSessions.getSelectedRow();// row becomes a row selected in the tblstudents
-        if (row != -1) {
-            int id = Integer.parseInt(tblSessions.getValueAt(row, 0).toString());
-            currentID = id;
-            update = true;
-            new NewSession().setVisible(true);
-            this.hide();
+        if (row != -1) {//make sure a row was chosen
+            int id = Integer.parseInt(tblSessions.getValueAt(row, 0).toString());//gets the id of the patient and stores it in the integer variable id
+            currentID = id;//makes the static variable currentSes = the ID
+            update = true;//sets the static variable update to be true
+            new NewSession().setVisible(true);//sets the screen viewPatient to be visiable
+            this.hide();//sets this screen to not be visiable
         } else {
-            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");
+            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");//alerts the user to select a row from the table
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        add++;
-        this.lblMonth.setText(pop.setMonth(add));
-        this.tblCalendar.setModel(pop.populateCalender(Integer.parseInt(cmbYear.getSelectedItem().toString()), DATE.revMonth(lblMonth.getText())));
+        add++;//increases the variable add by one
+        this.lblMonth.setText(pop.setMonth(add));//sets the tetxt in lblMonth to be what the methood setMonth sets it
+        this.tblCalendar.setModel(pop.populateCalender(Integer.parseInt(cmbYear.getSelectedItem().toString()), DATE.revMonth(lblMonth.getText())));//sets the model of tbl calender 
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubActionPerformed
-        add--;
-        this.lblMonth.setText(pop.setMonth(add));
-        this.tblCalendar.setModel(pop.populateCalender(Integer.parseInt(cmbYear.getSelectedItem().toString()), DATE.revMonth(lblMonth.getText())));
+        add--;//increases the variable add by one
+        this.lblMonth.setText(pop.setMonth(add));//sets the tetxt in lblMonth to be what the methood setMonth sets it
+        this.tblCalendar.setModel(pop.populateCalender(Integer.parseInt(cmbYear.getSelectedItem().toString()), DATE.revMonth(lblMonth.getText())));//sets the model of tbl calender 
     }//GEN-LAST:event_btnSubActionPerformed
 
     private void cmbYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbYearActionPerformed
-        this.tblCalendar.setModel(pop.populateCalender(Integer.parseInt(cmbYear.getSelectedItem().toString()), DATE.revMonth(lblMonth.getText())));
+        this.tblCalendar.setModel(pop.populateCalender(Integer.parseInt(cmbYear.getSelectedItem().toString()), DATE.revMonth(lblMonth.getText())));//sets the model of tbl calender 
     }//GEN-LAST:event_cmbYearActionPerformed
 
     private void btnViewSesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewSesActionPerformed
-        String selPatient = this.cmbPatient.getSelectedItem() + "";
-        if(this.list.getSelectedIndex() != -1){
+        String selPatient = this.cmbPatient.getSelectedItem() + "";//creates a string variable that stores the seleced item from the combo box
+        if(this.list.getSelectedIndex() != -1){//insures that an item was selected
         int val = selPatient.indexOf(' ');//get pos of space
         String PatientFname = selPatient.substring(0, val);//gets first name
         String PateintSname = selPatient.substring((val + 1), selPatient.length());//gets sur name 
-        s = ssn.getSession(PatientFname, PateintSname, this.list.getSelectedValue() + "");
-        new viewSessionDetails().setVisible(true);
+        s = ssn.getSession(PatientFname, PateintSname, this.list.getSelectedValue() + "");//creayes a new session object 
+        new viewSessionDetails().setVisible(true);//sets the screen viewPatient to be visiable
         }else{
-            JOptionPane.showMessageDialog(null, "Please select a session to view");
+            JOptionPane.showMessageDialog(null, "Please select a session to view");//alerts the user to select a row from the table
         }
     }//GEN-LAST:event_btnViewSesActionPerformed
 
@@ -1231,37 +1227,37 @@ public class viewSession extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUnameActionPerformed
 
     private void btnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDateActionPerformed
-        lblMonth.setText(pop.TodayMonth());
-        cmbYear.setSelectedIndex(0);
+        lblMonth.setText(pop.TodayMonth());//sets the text of lblMonth
+        cmbYear.setSelectedIndex(0);//sets the selected item from cmbYear
     }//GEN-LAST:event_btnDateActionPerformed
 
     private void btnViewSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewSesionActionPerformed
-        int x = tblCalendar.getSelectedRow();
-        int y = tblCalendar.getSelectedColumn();
-        if(x != -1 && y != -1){
-        Object i = tblCalendar.getModel().getValueAt(x, y);
-        String [] days = {i.toString()};
-        tSess = ssn.getManySessions(days, DATE.revMonth(lblMonth.getText())+ "", cmbYear.getSelectedItem() + "");
-        if(!tSess.isEmpty()){
-        new viewSessionDetails().setVisible(true);
+        int x = tblCalendar.getSelectedRow();///gets the selected row from tblCalendar
+        int y = tblCalendar.getSelectedColumn();//gets the selected row from tblCalendar
+        if(x != -1 && y != -1){//makes sure that a row and columb was selected 
+        Object i = tblCalendar.getModel().getValueAt(x, y);//creates a new object with the seected cell
+        String [] days = {i.toString()};//creates a new String array
+        tSess = ssn.getManySessions(days, DATE.revMonth(lblMonth.getText())+ "", cmbYear.getSelectedItem() + "");//useses the methood getManySessions to populate the array Tsess
+        if(!tSess.isEmpty()){//checks if the array tsess is empty
+        new viewSessionDetails().setVisible(true);//sets the screen viewPatient to be visiable
         }else
-          JOptionPane.showMessageDialog(null, "No sessions for this day");
+          JOptionPane.showMessageDialog(null, "No sessions for this day");//alaerts the user that there arw no sessions for slected day
         }else 
-            JOptionPane.showMessageDialog(null, "Please Select a day");
+            JOptionPane.showMessageDialog(null, "Please Select a day");//alterts the user to select a cell
     }//GEN-LAST:event_btnViewSesionActionPerformed
 
     private void btnUpdatePatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePatActionPerformed
         int row = tblPatients.getSelectedRow();// row becomes a row selected in the tblstudents
-        if (row != -1) {
-            int id = Integer.parseInt(tblPatients.getValueAt(row, 0).toString());
-            currentID = id;
-            update = true;
-            new LoginDetail().setVisible(true);
-        this.hide();
+        if (row != -1) {//makes sure a cell was selected
+            int id = Integer.parseInt(tblPatients.getValueAt(row, 0).toString());//gets the id of the patient and stores it in the integer variable id
+            currentID = id;//makes the static variable currentSes = the ID
+            update = true;//makes the static variable currentID = session id useing methood getPatient
+            new LoginDetail().setVisible(true);//sets the screen viewPatient to be visiable
+        this.hide();//sets this screen to not be visiable
         } else {
-            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");
+            JOptionPane.showMessageDialog(null, "Please Select A Row From The Table");//alerts the user to select a row from the table
         }
-        this.hide();
+        this.hide();//sets this screen to not be visiable
     }//GEN-LAST:event_btnUpdatePatActionPerformed
 
     private void btnViewSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewSesion1ActionPerformed
@@ -1269,12 +1265,12 @@ public class viewSession extends javax.swing.JFrame {
     }//GEN-LAST:event_btnViewSesion1ActionPerformed
 
     private void btnViewAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAllActionPerformed
-        String [] days = pop.sesionsInMonth(cmbYear.getSelectedItem() + "", DATE.revMonth(lblMonth.getText()) + "");
-        tSess = ssn.getManySessions(days, DATE.revMonth(lblMonth.getText()) + "", cmbYear.getSelectedItem() + "");
-        if(tSess.size() != 0){
-        new viewSessionDetails().setVisible(true);
+        String [] days = pop.sesionsInMonth(cmbYear.getSelectedItem() + "", DATE.revMonth(lblMonth.getText()) + "");//creates a string array that is populated by the methood sesionsInMonth
+        tSess = ssn.getManySessions(days, DATE.revMonth(lblMonth.getText()) + "", cmbYear.getSelectedItem() + "");//the array list tSess is populated wit the methood getManySessions
+        if(tSess.size() != 0){//checks that there are values stored in the array list tSess
+        new viewSessionDetails().setVisible(true);//sets the screen viewPatient to be visiable
         }else
-          JOptionPane.showMessageDialog(null, "No sessions for this Month");
+          JOptionPane.showMessageDialog(null, "No sessions for this Month");//alerts the user that there are no seeions in this month
     }//GEN-LAST:event_btnViewAllActionPerformed
 
     

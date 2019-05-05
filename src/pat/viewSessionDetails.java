@@ -12,24 +12,24 @@ import javax.swing.JOptionPane;
  * @author Jacob Sacks
  */
 public class viewSessionDetails extends javax.swing.JFrame {
-patArray ptn = new patArray();
-int count = 0;
+patArray ptn = new patArray();//creates an object for the class: connectDB
+int count = 0;//creates an integr varable called count
     /**
      * Creates new form viewSessionDetails
      */
-    public viewSessionDetails() {
-        initComponents();
-        if(viewSession.tSess != null){
-        viewSession.s = viewSession.tSess.get(count);
+    public viewSessionDetails() {//constructor methood for  Class
+        initComponents();//initiates all the components for the screen
+        if(viewSession.tSess != null){//if the ststic array list tSess is eqaul to null
+        viewSession.s = viewSession.tSess.get(count);// setes the object to be equal to the first possition of the array
         }else{
-            this.btnNext.setVisible(false);
+            this.btnNext.setVisible(false);//sets the btnNext not to be visibale
         }
-        this.lblCode.setText(viewSession.s.getcode());
-        this.lblCost.setText("R" + viewSession.s.getcode());
-        this.lblDOS.setText(viewSession.s.getDate());
-        this.lblTime.setText(viewSession.s.getTime());
-        this.checkBox.setEnabled(viewSession.s.isPaid());
-        this.lblIDC10.setText(viewSession.s.getIDC10());
+        this.lblCode.setText(viewSession.s.getcode());//sets lblCode text from the s object
+        this.lblCost.setText("R" + viewSession.s.getcode());//sets lblCost text from the s object
+        this.lblDOS.setText(viewSession.s.getDate());//sets lblDOS text from the s object
+        this.lblTime.setText(viewSession.s.getTime());//sets lblTime text from the s object
+        this.checkBox.setEnabled(viewSession.s.isPaid());//sets checkBox text from the s object
+        this.lblIDC10.setText(viewSession.s.getIDC10());//sets lblIDC10 text from the s object
         
     }
 
@@ -194,28 +194,28 @@ int count = 0;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPatientActionPerformed
-        viewSession.currentID =  viewSession.s.getPatID();
-        new viewPatient().setVisible(true);
-        new viewSessionDetails().setVisible(false);
+        viewSession.currentID =  viewSession.s.getPatID();//sets the static variable currentID
+        new viewPatient().setVisible(true);// makes the viewPatient screen to be visiable
+        this.hide();//sets this screen not to be visiable
     }//GEN-LAST:event_btnViewPatientActionPerformed
 
     private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
-       this.hide();
+       this.hide();//sets this screen not to be visiable
     }//GEN-LAST:event_btnBack1ActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        count++;
-        if(count == viewSession.tSess.size()){
-            JOptionPane.showMessageDialog(null, "No Next Session, Sorry");
-            count--;
+        count++;//increases count by one
+        if(count == viewSession.tSess.size()){//if the count variabe is smaller than the size of the tSess array
+            JOptionPane.showMessageDialog(null, "No Next Session, Sorry");//alerts the user that there is no next session
+            count--;//count decreases by one
         }else{
-        viewSession.s = viewSession.tSess.get(count);
-        this.lblCode.setText(viewSession.s.getcode());
-        this.lblCost.setText("R" + viewSession.s.getcode());
-        this.lblDOS.setText(viewSession.s.getDate());
-        this.lblTime.setText(viewSession.s.getTime());
-        this.checkBox.setEnabled(viewSession.s.isPaid());
-        this.lblIDC10.setText(viewSession.s.getIDC10());
+        viewSession.s = viewSession.tSess.get(count);//the static object s is eqauo to tSess at position count
+        this.lblCode.setText(viewSession.s.getcode());//sets lblCode text from the s object
+        this.lblCost.setText("R" + viewSession.s.getcode());//sets lblCost text from the s object
+        this.lblDOS.setText(viewSession.s.getDate());//sets lblDOS text from the s object
+        this.lblTime.setText(viewSession.s.getTime());//sets lblTime text from the s object
+        this.checkBox.setEnabled(viewSession.s.isPaid());//sets checkBox text from the s object
+        this.lblIDC10.setText(viewSession.s.getIDC10());//sets lblIDC10 text from the s object
         }
     }//GEN-LAST:event_btnNextActionPerformed
 
