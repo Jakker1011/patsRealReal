@@ -152,7 +152,7 @@ public class viewClient extends javax.swing.JFrame {
     }//GEN-LAST:event_menuLogoutActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        MediaPlayer mp = new MediaPlayer(); // declares a new MediaPlayer object
+        //MediaPlayer mp = new MediaPlayer(); // declares a new MediaPlayer object
         mp.playSound2();  //plays the audio 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
