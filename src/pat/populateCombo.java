@@ -22,151 +22,151 @@ import javax.swing.table.DefaultTableModel;
  */
 public class populateCombo {
 
-    connectDB db = new connectDB();
-    patArray ptn = new patArray();
-    CalendarModel mod = new CalendarModel();
-    sessionArray ssn = new sessionArray();
-    GregorianCalendar cal = new GregorianCalendar(); //Create calendar
-    Date DATE = new Date();
-    int realDay = cal.get(GregorianCalendar.DAY_OF_MONTH); //Get day
-    int realMonth = cal.get(GregorianCalendar.MONTH); //Get month
-    int realYear = cal.get(GregorianCalendar.YEAR); //Get year
+    connectDB db = new connectDB();//creates an object for the class: connectDB
+    patArray ptn = new patArray();//creates an object for the class: patArray
+    CalendarModel mod = new CalendarModel();//creates an object for the class: CalendarModel
+    sessionArray ssn = new sessionArray();//creates an object for the class: sessionArray
+    GregorianCalendar cal = new GregorianCalendar(); //Create calendar model
+    Date DATE = new Date();//creates an object for the class: Date
+    int realDay = cal.get(GregorianCalendar.DAY_OF_MONTH); //Get current day
+    int realMonth = cal.get(GregorianCalendar.MONTH); //Get current month
+    int realYear = cal.get(GregorianCalendar.YEAR); //Get current year
     int currentMonth = realMonth; //Match month and year
-    int currentYear = realYear;
+    int currentYear = realYear;//creates a static varable to store the year
 
     //populates session table
-    public DefaultTableModel populateSessionTable() {
-        DefaultTableModel model = db.getSession("SELECT * FROM tblSession;");
-        return model;
+    public DefaultTableModel populateSessionTable() {//creates a methood to popuate a JTable
+        DefaultTableModel model = db.getSession("SELECT * FROM tblSession;");//sets the DefaultTableModel form the connect DB class
+        return model;//returns the Default Table model
     }
 
-    //populates session table
-    public DefaultTableModel populatePatientTable() {
-        DefaultTableModel model = db.getPatient("SELECT * FROM tblPat;");
-        return model;
+    //populates patient table
+    public DefaultTableModel populatePatientTable() {//creates a methood to popuate a JTable
+        DefaultTableModel model = db.getPatient("SELECT * FROM tblPat;");//sets the DefaultTableModel form the connect DB class
+        return model;//returns the Default Table model
     }
 
-    //populates session table
-    public DefaultTableModel populateCalender(int year, int month) {
-        DefaultTableModel model = new DefaultTableModel();
-        mod.setMonth(year, month);
-        model.setDataVector(mod.calendar, mod.days);
-        return model;
+    //populates calender table
+    public DefaultTableModel populateCalender(int year, int month) {//creates a methood to popuate a JTable
+        DefaultTableModel model = new DefaultTableModel();//sets the DefaultTableModel form the connect DB class
+        mod.setMonth(year, month);//sets the days in the calendar table
+        model.setDataVector(mod.calendar, mod.days);//sets the model from the Model classes methood setDataVector
+        return model;//returns the Default Table model
     }
 
-    public String[] sesionsInMonth(String Year, String Month) {
-        ArrayList<String> day = new ArrayList<String>();
-        for (int i = 0; i < ssn.getSessionArray().size(); i++) {
-            if (ssn.getSessionArray().get(i).getDate().substring(0, 4).contains(Month) && ssn.getSessionArray().get(i).getDate().substring(5, 10).contains(Year)) {
-                day.add(ssn.getSessionArray().get(i).getDate().substring(3, 5));
-            }
-
-        }
-        String[] array = day.toArray(new String[day.size()]);
-        return array;
-    }
-
-    //populates schools combo boxes
-    public String[] populateYear() {
-        ArrayList<String> years = new ArrayList<String>();
-        for (int i = realYear; i > 2015; i--) {
-            years.add(i + "");
-        }
-        String[] array = years.toArray(new String[years.size()]);
-        return array;
-    }
-
-    public String setMonth(int add) {
-        String finalMonth = "";
-        int month = realMonth + add;
-        finalMonth = DATE.getFinalMonth(month);
-        return finalMonth;
-    }
-
-    //populates session table
-    public DefaultTableModel populateCreditTable() {
-        DefaultTableModel model = db.getCreditiors("SELECT patFName, patSName, dateOfSession ,amount\n"
+    //populates credit table
+    public DefaultTableModel populateCreditTable() {//creates a methood to popuate a JTable
+        DefaultTableModel model = db.getCreditiors("SELECT patFName, patSName, dateOfSession ,amount\n"//sets the DefaultTableModel form the connect DB class
                 + "FROM tblPat INNER JOIN tblSession ON tblPat.patID = tblSession.patID\n"
                 + "WHERE Paid = False;");
-        return model;
+        return model;//returns the Default Table model
     }
-
-    //populates schools combo boxes
-    public String[] populatePatients() {
-        String[] patients = new String[ptn.getPatientArray().size()];
-        for (int i = 0; i < ptn.getPatientArray().size(); i++) {
-            String fname = ptn.getPatientArray().get(i).getfName();
-            String lname = ptn.getPatientArray().get(i).getsName();
-            patients[i] = fname + " " + lname;
+    
+    //populates patients combo boxes
+    public String[] populatePatients() {//creats a methood to return a string array to populate a default combo box model
+        String[] patients = new String[ptn.getPatientArray().size()];//creates a string array to the size of PatientArray
+        for (int i = 0; i < ptn.getPatientArray().size(); i++) {//loops through patients array
+            String fname = ptn.getPatientArray().get(i).getfName();//gets the patients first name
+            String lname = ptn.getPatientArray().get(i).getsName();//gets the patients sur name
+            patients[i] = fname + " " + lname;//adds the first name and the surname to the array at position i
         }
-        return patients;
+        return patients;//returns the array
+    }
+    
+    public String[] sesionsInMonth(String Year, String Month) {//creats a methood to return a string array to populate a default combo box model
+        ArrayList<String> day = new ArrayList<String>();//creats a new array list called day
+        for (int i = 0; i < ssn.getSessionArray().size(); i++) {//loops through getSessionArray
+            if (ssn.getSessionArray().get(i).getDate().substring(0, 4).contains(Month) && ssn.getSessionArray().get(i).getDate().substring(5, 10).contains(Year)) {//if the month and the day is equal
+                day.add(ssn.getSessionArray().get(i).getDate().substring(3, 5));//the day part of the date is added to the array
+            }
+
+        }
+        String[] array = day.toArray(new String[day.size()]);//the array list is converted into a string array
+        return array;//the array is returned
     }
 
     //populates schools combo boxes
-    public String[] populateMED() {
-        ArrayList<String> MED = new ArrayList<String>();
-        ResultSet r = db.getResults("SELECT DISTINCT medAid FROM tblMed;");
+    public String[] populateYear() {//creats a methood to return a string array to populate a default combo box model
+        ArrayList<String> years = new ArrayList<String>();//creats a new array list called years
+        for (int i = realYear; i > 2015; i--) {//loops from the real year down to 2015
+            years.add(i + "");//add the year from the loop to the array list
+        }
+        String[] array = years.toArray(new String[years.size()]);//the array list is converted into a string array
+        return array;//the array is returned
+    }
+
+    public String setMonth(int add) {//methood to get the month inputed by the user into the calendar
+        String finalMonth = "";//creates a string varable called finalMonth
+        int month = realMonth + add;//adds the current year to the parsed in value
+        finalMonth = DATE.getFinalMonth(month);//formats the final month
+        return finalMonth;//returns the final month
+    }
+
+    //populates medical aid combo boxes
+    public String[] populateMED() {//creats a methood to return a string array to populate a default combo box model
+        ArrayList<String> MED = new ArrayList<String>();//creats a new array list called MED
+        ResultSet r = db.getResults("SELECT DISTINCT medAid FROM tblMed;");//sets a result set to the resutls got from the sql Statemnt 
         try {
-            while (r.next()) {
-                MED.add(r.getString("medAid"));
+            while (r.next()) {//while the resultset varable has a next value
+                MED.add(r.getString("medAid"));//gets the mediacl aid and adds it to the MED array
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(populateCombo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {//catches the statement
+            Logger.getLogger(populateCombo.class.getName()).log(Level.SEVERE, null, ex);//creates an execption
         }
-        String[] array = MED.toArray(new String[MED.size()]);
-        return array;
+        String[] array = MED.toArray(new String[MED.size()]);//the array list is converted into a string array
+        return array;//returns the array
     }
 
-    public String[] populateSession(String temp) {
-        ArrayList<String> client = new ArrayList<String>();
-        viewSession.currentPat = temp;
-        int val = temp.indexOf(' ');
-        String PatientFname = temp.substring(0, val);
-        String PateintSname = temp.substring((val + 1), temp.length());
-        for (int i = 0; i < ssn.getSessionArray().size(); i++) {
-            String date = ssn.getSessionEmail(PatientFname, PateintSname, i);
-            client.add(date);
+    public String[] populateSession(String temp) {//creats a methood to return a string array to populate a default combo box model
+        ArrayList<String> client = new ArrayList<String>();//creats a new array list called client
+        viewSession.currentPat = temp;//sets currentPat to the passes in varable
+        int val = temp.indexOf(' ');//gets index of the space
+        String PatientFname = temp.substring(0, val);//seperates into a firstname and surname
+        String PateintSname = temp.substring((val + 1), temp.length());//seperates into a firstname and surname
+        for (int i = 0; i < ssn.getSessionArray().size(); i++) {//loops through the session Array
+            String date = ssn.getSessionEmail(PatientFname, PateintSname, i);//gets the dtae of the sessions of the patient at i
+            client.add(date);//adds the date of session to the array
         }
 
-        String[] array = client.toArray(new String[client.size()]);
-        return array;
+        String[] array = client.toArray(new String[client.size()]);//the array list is converted into a string array
+        return array;//returns the array
     }
 
-    public String populateCMB(String medAid) {
-        String sqlS = "SELECT patID, patFName, patSName, tblPat.medAidNo, dateOfBirth, patEmail\n"
-                + "FROM tblMed INNER JOIN tblPat ON tblMed.medAidNo = tblPat.medAidNo\n"
-                + "WHERE medAid =  '" + medAid + "';";
-        return sqlS;
+    public String populateCMB(String medAid) {//creats a methood to return a sql Statement to populate a default combo box model
+        String sqlS = "SELECT patID, patFName, patSName, tblPat.medAidNo, dateOfBirth, patEmail\n"//Creates a sql statemnt to populate comboBox
+                + "FROM tblMed INNER JOIN tblPat ON tblMed.medAidNo = tblPat.medAidNo\n"//Creates a sql statemnt to populate comboBox
+                + "WHERE medAid =  '" + medAid + "';";//Creates a sql statemnt to populate comboBox
+        return sqlS;//returns the sql Statemnt
     }
 
-    public ListModel<String> populateClientList(int id) {
-        DefaultListModel sess = new DefaultListModel();;
-        for (int i = 0; i < ssn.getSessionArray().size(); i++) {
-            if (ssn.getSessionArray().get(i).getPatID() == id && ssn.getSessionArray().get(i).isPaid() == false) {
-                sess.addElement(ssn.getSessionArray().get(i).getDate() + "       R" + ssn.getSessionArray().get(i).getAmount());
+    public ListModel<String> populateClientList(int id) {//creates a methood to popuate a a List Model
+        DefaultListModel sess = new DefaultListModel();//creates a default listbmodel called sess
+        for (int i = 0; i < ssn.getSessionArray().size(); i++) {//loops through the sessionArray
+            if (ssn.getSessionArray().get(i).getPatID() == id && ssn.getSessionArray().get(i).isPaid() == false) {//checks if is the correct Patient and if the email is not paid
+                sess.addElement(ssn.getSessionArray().get(i).getDate() + "       R" + ssn.getSessionArray().get(i).getAmount());//adds an elemt to the list
             }
 
         }
-        return sess;
+        return sess;////returns the list model
     }
 
-    public String TodayMonth() {
-        String month = DATE.getFinalMonth(currentMonth);
-        return month;
+    public String TodayMonth() {//methood to return current month
+        String month = DATE.getFinalMonth(currentMonth);//formats current mounth
+        return month;//returns current month
     }
 
    
 //stores all the dates that sessions occour in a list
 
-    public String[] dates() {
-        String[] dates = new String[ssn.getSessionArray().size()];
-        for (int i = 0; i < ssn.getSessionArray().size(); i++) {
-            dates[i] = ssn.getSessionArray().get(i).getDate();
+    public String[] dates() {//creats a methood to return a string array to populate a default combo box model
+        String[] dates = new String[ssn.getSessionArray().size()];//creates a string array to the size of SessionArray
+        for (int i = 0; i < ssn.getSessionArray().size(); i++) {//lops throught session array
+            dates[i] = ssn.getSessionArray().get(i).getDate();//adds to the dates array
         }
-        return dates;
+        return dates;//returns the dates array
     }
 
-    public boolean checkIfSession(String date, String[] dates) {
+   /*public boolean checkIfSession(String date, String[] dates) {
         boolean temp = false;
         for (int i = 0; i < dates.length; i++) {
             if (dates[i].equals(date)) {
@@ -174,47 +174,47 @@ public class populateCombo {
             }
         }
         return temp;
-    }
+    } */
 
-    public String [] getMin(String Hour) {
-        String[] times = new String[4];
-        int time = 15;
-        times[0] = Hour + ":00";
-        for (int i = 0; i < 3; i++) {
-            times[i + 1] = Hour + ":" + time;
-            time = time + 15;
+    public String [] getMin(String Hour) {//creats a methood to return a string array to populate a default combo box model
+        String[] times = new String[4];//creates a string array that stores 4 elements
+        int time = 15;//sets time to 15
+        times[0] = Hour + ":00";//formats the time
+        for (int i = 0; i < 3; i++) {//runs a loop from 0 to 3
+            times[i + 1] = Hour + ":" + time;//adds the time in a formateded form to the array
+            time = time + 15;//increateses time by 15
         }
-        return times;
+        return times;//returns the times array
     }
     
-    public String[] populateName() {
+    public String[] populateName() {//creats a methood to return a string array to populate a default combo box model
        connectDB db = new connectDB();
-         ArrayList<String> Names = new ArrayList<String>();
-        ResultSet r = db.getResults("SELECT DISTINCT patFName FROM tblPat;");
+         ArrayList<String> Names = new ArrayList<String>();//creats a new array list called MED
+        ResultSet r = db.getResults("SELECT DISTINCT patFName FROM tblPat;");//sets a result set to the resutls got from the sql Statemnt 
         try {
-            while (r.next()) {
-                Names.add(r.getString("patFName"));
+            while (r.next()) {//while the resultset varable has a next value
+                Names.add(r.getString("patFName"));//gets the patFName and adds it to the Names array
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(populateCombo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {//catches the statement
+            Logger.getLogger(populateCombo.class.getName()).log(Level.SEVERE, null, ex);//creates an execption for the catch
         }
-        String[] array = Names.toArray(new String[Names.size()]);
-        return array;
+        String[] array = Names.toArray(new String[Names.size()]);//the array list is converted into a string array
+        return array;//returns the array
     }
     
-    public String[] populateSName() {
+    public String[] populateSName() {//creats a methood to return a string array to populate a default combo box model
        connectDB db = new connectDB();
-         ArrayList<String> Names = new ArrayList<String>();
-        ResultSet r = db.getResults("SELECT DISTINCT patSName FROM tblPat;");
+         ArrayList<String> Names = new ArrayList<String>();//creats a new array list called names
+        ResultSet r = db.getResults("SELECT DISTINCT patSName FROM tblPat;");//sets a result set to the resutls got from the sql Statemnt 
         try {
-            while (r.next()) {
-                Names.add(r.getString("patSName"));
+            while (r.next()) {//while the resultset varable has a next value
+                Names.add(r.getString("patSName"));//gets the patSName and adds it to the names array
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(populateCombo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {//catches the statement
+            Logger.getLogger(populateCombo.class.getName()).log(Level.SEVERE, null, ex);//creates an execption for the catch
         }
-        String[] array = Names.toArray(new String[Names.size()]);
-        return array;
+        String[] array = Names.toArray(new String[Names.size()]);//the array list is converted into a string array
+        return array;//returns the array
     }
     
 }
